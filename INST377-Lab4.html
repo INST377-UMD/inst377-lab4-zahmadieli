@@ -1,0 +1,139 @@
+<html>
+<head>
+    
+    <title>INST377 - Lab 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            text-align: center;
+        }
+        h1 {
+            text-align: left;
+            margin-left: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 80%;
+        }
+        .section {
+            background-color: purple;
+            color: white;
+            border: 3px solid black;
+            padding: 15px;
+            width: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: lightgray;
+        }
+        input {
+            flex-grow: 1;
+            padding: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="main-heading">INST377 - Lab 4</h1>
+
+    <div class="container">
+        <!-- First Row -->
+        <div class="row">
+            <div class="section">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <button class="button" onclick="alertName()">Alert Me!</button>
+            </div>
+            <div class="section">
+                <button class="button" onclick="changeColor()">Change Color</button>
+            </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="row">
+            <div class="section">
+                <form onsubmit="validateText(event)">
+                    <label for="text">Text Tester:</label>
+                    <input type="text" id="text" name="text" autocomplete="on">
+                    <button type="submit" class="button">Validate Text</button>
+                </form>
+            </div>
+            <div class="section">
+                <button class="button" onclick="addText()">Add Text</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function alertName() {
+            var nameInput = document.getElementById("name");
+            var name = nameInput.value.trim();
+            if (name !== "") {
+                alert("Hi " + name + "!");
+                nameInput.value = "";  
+            } else {
+                alert("Please enter a name.");
+            }
+        }
+
+        
+        var isBlue = true;
+        function changeColor() {
+            if (isBlue) {
+                document.body.style.backgroundColor = "green";
+            } else {
+                document.body.style.backgroundColor = "lightblue";
+            }
+            isBlue = !isBlue;
+        }
+
+        
+        function validateText(event) {
+            event.preventDefault(); 
+
+            var textInput = document.getElementById("text");
+            var text = textInput.value;
+            var validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/; 
+
+            if (validation.test(text)) {
+                alert("How about... Nah");
+                
+            } else {
+                textInput.value = ""; 
+            }
+        }
+
+       
+        function addText() {
+            var heading = document.getElementById("main-heading");
+            if (!heading.innerText.includes(" - Add Text")) {
+                heading.innerText += " - Add Text";
+            }
+        }
+    </script>
+
+</body>
+</html>
